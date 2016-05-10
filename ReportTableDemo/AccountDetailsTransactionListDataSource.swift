@@ -8,22 +8,41 @@
 
 import UIKit
 
-private protocol RowInterface {
-    func getType() -> RowType
+private enum Cells: String {
+    case Header
+    case Subheader
+    case Detail
+    case Message
+    case Total
+    case Subfooter
 }
 
-//private protocol BindingCell  {
-//    func bind(row: RowInterface)
-//    
-//}
-
-private enum RowType {
-    case  HEADER
-    case  SUBHEADER
-    case  ROW
-    case  MESSAGE_ROW
-    case  TOTAL_ROW
-    case  SUB_FOOTER_ROW
+private enum Row {
+    case  HeaderRow( title: String, subtitle: String )
+    case  SubheaderRow( title: String, odd: Bool )
+    case  DetailRow( description: String, amount: String, odd: Bool )
+    case  MessageRow( message: String )
+    case  TotalRow( total: String, odd: Bool )
+    case  SubfooterRow( odd : Bool )
+    
+    var cellId: Cells {
+        get {
+            switch self {
+            case HeaderRow:
+                return .Header
+            case SubheaderRow:
+                return .Subheader
+            case  DetailRow:
+                return .Detail
+            case MessageRow:
+                return .Message
+            case TotalRow:
+                return .Total
+            case SubfooterRow:
+                return .Subfooter
+            }
+        }
+    }
 }
 
 
@@ -45,24 +64,15 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
         outboundDateFormat.dateFormat = "MMM' 'dd', 'yyyy"
     }
 
-    private var dataset = [RowInterface]()
+    private var dataset = [Row]()
     private var odd = false
-    
-    enum Cells: String {
-        case Header
-        case Subheader
-        case Detail
-        case Message
-        case Total
-        case Subfooter
-    }
     
     func appendHeaderRow(name: String , subtitle: String ) {
     
-        dataset.append(HeaderRow(title: name, subtitle: subtitle));
+        dataset.append(.HeaderRow(title: name, subtitle: subtitle));
     }
     
-    func appendSubHeaderRow( inDateString: String ) {
+    func appendSubheaderRow( inDateString: String ) {
     
         odd = !odd;
         
@@ -73,44 +83,40 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
             abort()
         }
         let outDate = outboundDateFormat.stringFromDate(date)
-        dataset.append(SubHeaderRow(title: outDate, odd: odd))
+        dataset.append(.SubheaderRow(title: outDate, odd: odd))
     }
     
     func appendDetailRow(description: String, amount: Double, debit: String) {
     
         let amountString = (debit == "D" ? "" : "-") + String( format: "%.2d", amount )
-        dataset.append( DetailRow(description: description, amount: amountString, odd: odd));
+        dataset.append( .DetailRow(description: description, amount: amountString, odd: odd));
     }
     
-    func appendSubFooterRow() {
+    func appendSubfooterRow() {
     
-        dataset.append( SubFooterRow( odd: odd ));
+        dataset.append(.SubfooterRow( odd: odd ));
     }
     
     func appendTotalRow(total: Double) {
     
         odd = !odd;
         let totalString = String( format: "%.2f", total)
-        dataset.append(TotalRow(total: totalString, odd: odd));
+        dataset.append(.TotalRow(total: totalString, odd: odd));
     }
     
     func appendMessageRow(message: String) {
     
-        dataset.append(MessageRow(message: message));
+        dataset.append(.MessageRow(message: message));
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(Cells.Header.rawValue, forIndexPath: indexPath) as! BindingCell
-        cell.bind(dataset[ indexPath.row ])
+        let data = dataset[ indexPath.row ]
+        let cell = tableView.dequeueReusableCellWithIdentifier(data.cellId.rawValue, forIndexPath: indexPath) as! BindingCell
+        cell.bind(data)
         return cell;
     }
-    
-//    public void onBindViewCell(UITableViewCell holder, int position) {
-//    
-//    holder.bind(position);
-//    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataset.count
@@ -120,100 +126,42 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
     // UITableViewCell
     
     
-    static func processBackgroundColour(odd: Bool, view: UIView ) {
-    
-        if odd {
-            view.backgroundColor = UIColor( rgb: oddBandBackground );
-        }
-        else {
-            view.backgroundColor = UIColor( rgb: evenBandBackground );
-        }
-    }
-    
-    private struct HeaderRow : RowInterface {
-    
-        let title: String
-        let subtitle: String
-        
-        func getType() -> RowType  {
-        
-            return .HEADER;
-        }
-    }
-    
-    private struct SubHeaderRow : RowInterface {
-    
-        let title: String
-        let odd: Bool
-        
-        func getType() -> RowType  {
-            return .SUBHEADER;
-        }
-    }
-    
-    private struct DetailRow : RowInterface {
-    
-        let description: String
-        let amount: String
-        let odd: Bool
-        
-        func getType() -> RowType  {
-        
-            return .ROW;
-        }
-    }
-    
-    
-    private struct SubFooterRow : RowInterface {
-    
-        let odd : Bool
-        
-        func getType() -> RowType  {
-            return .SUB_FOOTER_ROW;
-        }
-    }
-    
-    private struct TotalRow : RowInterface {
-    
-        let total: String
-        let odd: Bool
-        
-        func getType() -> RowType  {
-            return .TOTAL_ROW;
-        }
-    }
-    
-    private struct MessageRow : RowInterface {
-    
-        let message: String
-        
-        func getType() -> RowType  {
-            return .MESSAGE_ROW;
-        }
-    }
-    
     
     // Row
     
     private class BindingCell: UITableViewCell {
-        private func bind(row: RowInterface) {
-            assert(true, "must override bind")
+        private func bind(row: Row) {
+            assert(false, "must override bind")
         }
+        
+        func processBackgroundColour(odd: Bool ) {
+            
+            if odd {
+                //contentView ?
+                backgroundColor = UIColor( rgb: oddBandBackground );
+            }
+            else {
+                backgroundColor = UIColor( rgb: evenBandBackground );
+            }
+        }
+        
 
     }
-    
     
      private class HeaderCell: BindingCell {
      
         @IBOutlet var titleLabel: UILabel!
         @IBOutlet var subtitleLabel: UILabel!
     
-        private override func bind(row: RowInterface) {
+        private override func bind(row: Row) {
     
-            let headerRow =  row as! HeaderRow
-            titleLabel.text = headerRow.title
-            subtitleLabel.text = headerRow.subtitle
-        
+            switch row {
+            case let .HeaderRow( title, subtitle):
+                titleLabel.text = title
+                subtitleLabel.text = subtitle
+            default:
+                break
+            }
         }
     }
     
@@ -221,12 +169,15 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
     
         @IBOutlet var titleLabel: UILabel!
         
-        private override func bind(row: RowInterface) {
+        private override func bind(row: Row) {
         
-            let subheaderRow =  row as! SubHeaderRow
-            titleLabel.text = subheaderRow.title
-        
-            DataSource.processBackgroundColour(subheaderRow.odd, view: contentView);
+            switch row {
+            case let .SubheaderRow( title, odd ):
+                titleLabel.text = title
+                processBackgroundColour(odd);
+            default:
+                break
+            }
         }
     }
     
@@ -235,23 +186,30 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
         @IBOutlet var descriptionLabel: UILabel!
         @IBOutlet var amountLabel: UILabel!
     
-        private override func bind(row: RowInterface) {
+        private override func bind(row: Row) {
     
-            let detailRow = row as! DetailRow
-            descriptionLabel.text = detailRow.description
-            amountLabel.text = detailRow.amount
-            
-            DataSource.processBackgroundColour(detailRow.odd, view: contentView);
+            switch row {
+            case let .DetailRow( description, amount, odd ):
+                descriptionLabel.text = description
+                amountLabel.text = amount
+                processBackgroundColour(odd)
+            default:
+                break
+            }
         }
     }
         
     
-    private class SubFooterCell: BindingCell {
+    private class SubfooterCell: BindingCell {
 
-        private override func bind(row: RowInterface) {
+        private override func bind(row: Row) {
     
-            let subfooterRow = row as! SubFooterRow
-            DataSource.processBackgroundColour(subfooterRow.odd, view: contentView);
+            switch row {
+            case let .SubfooterRow( odd ):
+                processBackgroundColour(odd);
+            default:
+                break
+            }
         }
     }
     
@@ -259,13 +217,15 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
     
         @IBOutlet var totalLabel: UILabel!
         
+        private override func bind(row: Row) {
         
-        private override func bind(row: RowInterface) {
-        
-            let totalRow = row as! TotalRow
-            totalLabel.text = totalRow.total
-            
-            DataSource.processBackgroundColour(totalRow.odd, view: contentView);
+            switch row {
+            case let .TotalRow(total, odd):
+                totalLabel.text = total
+                processBackgroundColour(odd);
+            default:
+                break
+            }
         
         }
     }
@@ -274,16 +234,16 @@ class AccountDetailsTransactionListDataSource: NSObject, UITableViewDataSource {
     
         @IBOutlet var messageLabel: UILabel!
     
-        private override func bind(row: RowInterface) {
+        private override func bind(row: Row) {
     
-            let messageRow = row as! MessageRow
-            messageLabel.text = messageRow.message
-            
-            DataSource.processBackgroundColour(true, view: contentView);
+            switch row {
+            case let .MessageRow( message ):
+                messageLabel.text = message
+                processBackgroundColour(true);
+            default:
+                break
+            }
         }
     }
    
-    
-    
-    
 }

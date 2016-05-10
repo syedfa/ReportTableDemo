@@ -119,7 +119,7 @@ class TransactionViewController: UIViewController {
         while curTransaction != nil {
         
             let curDate = curTransaction!.date
-            dataSource.appendSubHeaderRow(curDate)
+            dataSource.appendSubheaderRow(curDate)
             
             while (curTransaction != nil) && (curTransaction!.date == curDate) {
             
@@ -133,7 +133,7 @@ class TransactionViewController: UIViewController {
                 
                 curTransaction = (i < transactionData.count) ? transactionData[i++] : nil
             }
-            dataSource.appendSubFooterRow()
+            dataSource.appendSubfooterRow()
         
         }
         dataSource.appendTotalRow(total)
