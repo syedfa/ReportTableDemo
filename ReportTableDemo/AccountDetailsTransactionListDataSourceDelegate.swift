@@ -1,0 +1,254 @@
+//
+//  AccountDetailsTransactionListDataSource.swift
+//  ReportTableDemo
+//
+//  Created by Lyle Resnick on 2016-05-09.
+//  Copyright © 2016 Cellarpoint. All rights reserved.
+//
+
+import UIKit
+
+private enum Cell: String {
+    case Header
+    case Subheader
+    case Detail
+    case Message
+    case Total
+    case Subfooter
+}
+
+private enum Row {
+    case  Header( title: String, subtitle: String )
+    case  Subheader( title: String, odd: Bool )
+    case  Detail( description: String, amount: String, odd: Bool )
+    case  Message( message: String )
+    case  Total( total: String, odd: Bool )
+    case  Subfooter( odd : Bool )
+    
+    var cellId: Cell {
+        get {
+            switch self {
+            case Header:
+                return .Header
+            case Subheader:
+                return .Subheader
+            case  Detail:
+                return .Detail
+            case Message:
+                return .Message
+            case Total:
+                return .Total
+            case Subfooter:
+                return .Subfooter
+            }
+        }
+    }
+    var height: CGFloat {
+        get {
+            switch self {
+            case Header:
+                return 60.0
+            case Subheader:
+                return 34.0
+            case Detail:
+                return 18.0
+            case Message:
+                return 100.0
+            case Total:
+                return 44.0
+            case Subfooter:
+                return 18.0
+            }
+        }
+    }
+
+}
+
+class AccountDetailsTransactionListDataSourceDelegate: NSObject {
+    
+    private let inboundDateFormat = NSDateFormatter()
+    private let outboundDateFormat = NSDateFormatter()
+    
+    override init() {
+        inboundDateFormat.dateFormat = "yyyy'-'MM'-'dd"
+        outboundDateFormat.dateFormat = "MMM' 'dd', 'yyyy"
+    }
+
+    private var rows = [Row]()
+    private var odd = false
+    
+    func appendHeader(name: String , subtitle: String ) {
+    
+        rows.append(.Header(title: name, subtitle: subtitle));
+    }
+    
+    func appendSubheader( inDateString: String ) {
+    
+        odd = !odd;
+        
+        guard
+            let date = inboundDateFormat.dateFromString( inDateString )
+        else {
+            NSLog("Format of Transaction Date  is incorrect")
+            abort()
+        }
+        let outDate = outboundDateFormat.stringFromDate(date)
+        rows.append(.Subheader(title: outDate, odd: odd))
+    }
+    
+    func appendDetail(description: String, amount: Double, debit: String) {
+    
+        let amountString = (debit == "D" ? "" : "-") + String( format: "%.2f", amount )
+        rows.append( .Detail(description: description, amount: amountString, odd: odd));
+    }
+    
+    func appendSubfooter() {
+    
+        rows.append(.Subfooter( odd: odd ));
+    }
+    
+    func appendTotal(total: Double) {
+    
+        odd = !odd;
+        let totalString = String( format: "%.2f", total)
+        rows.append(.Total(total: totalString, odd: odd));
+    }
+    
+    func appendMessage(message: String) {
+    
+        rows.append(.Message(message: message));
+    }
+}
+
+// MARK: - Cells
+
+private protocol TransactionCell {
+    func bind(row: Row)
+}
+
+extension TransactionCell where Self: UITableViewCell {
+    var oddBandBackground: Int { return 0xF7F8FC }
+    var evenBandBackground: Int { return 0xFAFBFD }
+    
+    func processBackgroundColour(odd: Bool ) {
+        
+        if odd {
+            backgroundColor = UIColor( rgb: oddBandBackground );
+        }
+        else {
+            backgroundColor = UIColor( rgb: evenBandBackground );
+        }
+    }
+}
+
+class HeaderCell: UITableViewCell, TransactionCell {
+    
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var subtitleLabel: UILabel!
+    
+    private func bind(row: Row) {
+        
+        if case let .Header( title, subtitle) = row {
+            titleLabel.text = title
+            subtitleLabel.text = subtitle
+        }
+    }
+}
+
+class SubheaderCell: UITableViewCell, TransactionCell {
+    
+    @IBOutlet private var titleLabel: UILabel!
+    
+    private func bind(row: Row) {
+        
+        if case let .Subheader( title, odd ) = row {
+            titleLabel.text = title
+            processBackgroundColour(odd)
+        }
+    }
+}
+
+class DetailCell: UITableViewCell, TransactionCell {
+    
+    @IBOutlet private var descriptionLabel: UILabel!
+    @IBOutlet private var amountLabel: UILabel!
+    
+    private func bind(row: Row) {
+        
+        if case let .Detail( description, amount, odd ) = row {
+            descriptionLabel.text = description
+            amountLabel.text = amount
+            processBackgroundColour(odd)
+        }
+    }
+}
+
+
+class SubfooterCell: UITableViewCell, TransactionCell {
+    
+    private func bind(row: Row) {
+        
+        switch row {
+        case let .Subfooter( odd ):
+            processBackgroundColour(odd);
+        default:
+            break
+        }
+    }
+}
+
+class TotalCell: UITableViewCell, TransactionCell {
+    
+    @IBOutlet private var totalLabel: UILabel!
+    
+    private func bind(row: Row) {
+        
+        if case let .Total(total, odd) = row {
+            totalLabel.text = total
+            processBackgroundColour(odd)
+        }
+    }
+}
+
+class MessageCell: UITableViewCell, TransactionCell {
+    
+    @IBOutlet private var messageLabel: UILabel!
+    
+    private  func bind(row: Row) {
+        
+        if case let .Message( message ) = row {
+            messageLabel.text = message
+            processBackgroundColour(true)
+        }
+    }
+}
+
+
+// MARK: - UITableViewDataSource
+
+extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let data = rows[ indexPath.row ]
+        let cell = tableView.dequeueReusableCellWithIdentifier(data.cellId.rawValue, forIndexPath: indexPath) as! TransactionCell
+        cell.bind(data)
+        return cell as! UITableViewCell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows.count
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return rows[ indexPath.row ].height
+    }
+}
+
+

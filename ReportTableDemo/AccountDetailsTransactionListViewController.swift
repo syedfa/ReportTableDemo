@@ -16,6 +16,7 @@ struct Transaction {
 }
 
 
+//let transactionData:[Transaction] = []
 let transactionData = [
     Transaction( date: "2016-04-01", description: "Starbucks", amount: 3.11, debit: "D" ),
     Transaction( date: "2016-04-01", description: "Firkin", amount: 15.34, debit: "D" ),
@@ -85,41 +86,40 @@ let postedData = [
 
 
 
-class TransactionViewController: UIViewController {
+class AccountDetailsTransactionListViewController: UIViewController {
     
-    let dataSource = AccountDetailsTransactionListDataSource()
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    let dataSourceDelegate = AccountDetailsTransactionListDataSourceDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.dataSource = dataSourceDelegate
+        tableView.delegate = dataSourceDelegate
         
-        
-        appendAuthorizedTransactions()
-       // appendPostedTransactions()
-
-        
-        
+        appendTransactions( transactionData, title: "Authorized Transactions" )
+        appendTransactions( postedData, title: "Posted Transactions" )
     }
     
-    
-    
-    private func appendAuthorizedTransactions() {
+    private func appendTransactions( data: [Transaction], title: String ) {
         
-        dataSource.appendHeaderRow("Authorized Transactions", subtitle: "")
+        dataSourceDelegate.appendHeader(title, subtitle: "")
         
-        if (transactionData.count == 0) {
-            dataSource.appendMessageRow("Authorized Transactions Not Available")
+        if (data.count == 0) {
+            dataSourceDelegate.appendMessage("\(title) are not currently Available. You might want to call us and tell us what you think ")
             return
         }
         
         var i = 0
-        var curTransaction: Transaction? = (i < transactionData.count) ? transactionData[i++] : nil
+        var curTransaction: Transaction? = (i < data.count) ? data[i++] : nil
         
         var total = 0.0
         while curTransaction != nil {
         
             let curDate = curTransaction!.date
-            dataSource.appendSubheaderRow(curDate)
+            dataSourceDelegate.appendSubheader(curDate)
             
             while (curTransaction != nil) && (curTransaction!.date == curDate) {
             
@@ -129,14 +129,14 @@ class TransactionViewController: UIViewController {
                 else {
                     total -= curTransaction!.amount
                 }
-                dataSource.appendDetailRow(curTransaction!.description, amount: curTransaction!.amount, debit: curTransaction!.debit)
+                dataSourceDelegate.appendDetail(curTransaction!.description, amount: curTransaction!.amount, debit: curTransaction!.debit)
                 
-                curTransaction = (i < transactionData.count) ? transactionData[i++] : nil
+                curTransaction = (i < data.count) ? data[i++] : nil
             }
-            dataSource.appendSubfooterRow()
+            dataSourceDelegate.appendSubfooter()
         
         }
-        dataSource.appendTotalRow(total)
+        dataSourceDelegate.appendTotal(total)
         
     }
 
