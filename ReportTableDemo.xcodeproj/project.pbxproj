@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3C86F801CE4C0EE00A21CFE /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C86F7F1CE4C0EE00A21CFE /* Transactions.swift */; };
 		B3D6E3ED1CDD217E00DD2325 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6E3EC1CDD217E00DD2325 /* AppDelegate.swift */; };
 		B3D6E3EF1CDD217E00DD2325 /* AccountDetailsTransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6E3EE1CDD217E00DD2325 /* AccountDetailsTransactionListViewController.swift */; };
 		B3D6E3F21CDD217E00DD2325 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3D6E3F01CDD217E00DD2325 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B3C86F7F1CE4C0EE00A21CFE /* Transactions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
 		B3D6E3E91CDD217E00DD2325 /* ReportTableDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReportTableDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D6E3EC1CDD217E00DD2325 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3D6E3EE1CDD217E00DD2325 /* AccountDetailsTransactionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsTransactionListViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				B3D6E3F51CDD217E00DD2325 /* LaunchScreen.storyboard */,
 				B3D6E3F81CDD217E00DD2325 /* Info.plist */,
 				B3D6E41C1CE10E0D00DD2325 /* Color.swift */,
+				B3C86F7F1CE4C0EE00A21CFE /* Transactions.swift */,
 			);
 			path = ReportTableDemo;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3D6E41B1CE0D42500DD2325 /* AccountDetailsTransactionListDataSourceDelegate.swift in Sources */,
+				B3C86F801CE4C0EE00A21CFE /* Transactions.swift in Sources */,
 				B3D6E41D1CE10E0D00DD2325 /* Color.swift in Sources */,
 				B3D6E3EF1CDD217E00DD2325 /* AccountDetailsTransactionListViewController.swift in Sources */,
 				B3D6E3ED1CDD217E00DD2325 /* AppDelegate.swift in Sources */,

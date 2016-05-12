@@ -8,81 +8,6 @@
 
 import UIKit
 
-struct Transaction {
-    var date: String
-    var description: String
-    var amount: Double
-    var debit: String
-}
-
-
-//let transactionData:[Transaction] = []
-let transactionData = [
-    Transaction( date: "2016-04-01", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-01", description: "Firkin", amount: 15.34, debit: "D" ),
-    Transaction( date: "2016-04-02", description: "Starbucks", amount: 5.22, debit: "D" ),
-    Transaction( date: "2016-04-05", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-07", description: "Starbucks", amount: 4.32, debit: "D" ),
-    Transaction( date: "2016-04-07", description: "TTC", amount: 28.00, debit: "D" ),
-    Transaction( date: "2016-04-09", description: "Starbucks", amount: 15.20, debit: "D" ),
-    Transaction( date: "2016-04-10", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-11", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-11", description: "Pizza Pizza", amount: 33.22, debit: "D" ),
-    Transaction( date: "2016-04-12", description: "Starbucks", amount: 5.22, debit: "D" ),
-    Transaction( date: "2016-04-12", description: "PetroGaz Ottawa", amount: 80.98, debit: "D" ),
-    Transaction( date: "2016-04-15", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-17", description: "Starbucks", amount: 4.32, debit: "D" ),
-    Transaction( date: "2016-04-17", description: "LCBO", amount: 400.55, debit: "D" ),
-    Transaction( date: "2016-04-19", description: "Starbucks", amount: 15.20, debit: "D" ),
-    Transaction( date: "2016-04-20", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-20", description: "Mr Greek", amount: 13.25, debit: "D" ),
-    Transaction( date: "2016-04-20", description: "Payment", amount: 400.00, debit: "C" ),
-    Transaction( date: "2016-04-21", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-22", description: "Starbucks", amount: 5.22, debit: "D" ),
-    Transaction( date: "2016-04-25", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-25", description: "Burrito Boyz", amount: 23.49, debit: "D" ),
-    Transaction( date: "2016-04-27", description: "Starbucks", amount: 4.32, debit: "D" ),
-    Transaction( date: "2016-04-27", description: "Georges Jazz Bar", amount: 56.49, debit: "D" ),
-    Transaction( date: "2016-04-29", description: "Starbucks", amount: 15.20, debit: "D" ),
-    Transaction( date: "2016-04-30", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-04-30", description: "Mark's Work Wearhouse", amount: 206.66, debit: "D" )
-]
-
-let postedData = [
-
-    Transaction( date: "2016-05-01", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-02", description: "Starbucks", amount: 5.22, debit: "D" ),
-    Transaction( date: "2016-05-02", description: "Shell Steeles West", amount: 44.62, debit: "D" ),
-    Transaction( date: "2016-05-05", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-05", description: "The Rex", amount: 53.41, debit: "D" ),
-    Transaction( date: "2016-05-07", description: "Starbucks", amount: 4.32, debit: "D" ),
-    Transaction( date: "2016-05-09", description: "LCBO", amount: 45.20, debit: "D" ),
-    Transaction( date: "2016-05-09", description: "Starbucks", amount: 15.20, debit: "D" ),
-    Transaction( date: "2016-05-09", description: "Royal Ontario Museum", amount: 115.60, debit: "D" ),
-    Transaction( date: "2016-05-10", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-11", description: "Starbucks", amount: 6.21, debit: "D" ),
-    Transaction( date: "2016-05-11", description: "Domino's Pizza", amount: 33.22, debit: "D" ),
-    Transaction( date: "2016-05-12", description: "Starbucks", amount: 5.22, debit: "D" ),
-    Transaction( date: "2016-05-12", description: "PetroGaz Toronto", amount: 80.98, debit: "D" ),
-    Transaction( date: "2016-05-15", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-17", description: "Tim Horton's", amount: 4.32, debit: "D" ),
-    Transaction( date: "2016-05-17", description: "LCBO", amount: 400.55, debit: "D" ),
-    Transaction( date: "2016-05-19", description: "Starbucks", amount: 15.20, debit: "D" ),
-    Transaction( date: "2016-05-20", description: "Tim Hortons", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-20", description: "Mr Greek", amount: 13.25, debit: "D" ),
-    Transaction( date: "2016-05-20", description: "Payment", amount: 400.00, debit: "C" ),
-    Transaction( date: "2016-05-21", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-22", description: "Starbucks", amount: 5.22, debit: "D" ),
-    Transaction( date: "2016-05-25", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-25", description: "Burrito Boyz", amount: 23.49, debit: "D" ),
-    Transaction( date: "2016-05-27", description: "Starbucks", amount: 4.32, debit: "D" ),
-    Transaction( date: "2016-05-27", description: "Georges Jazz Bar", amount: 56.49, debit: "D" ),
-    Transaction( date: "2016-05-29", description: "Starbucks", amount: 15.20, debit: "D" ),
-    Transaction( date: "2016-05-30", description: "Starbucks", amount: 3.11, debit: "D" ),
-    Transaction( date: "2016-05-30", description: "Mark's Work Wearhouse", amount: 206.66, debit: "D" ),
-
-    
-]
 
 
 
@@ -96,14 +21,15 @@ class AccountDetailsTransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        processTransactions( authorizedData, title: "Authorized Transactions" )
+        processTransactions( postedData, title: "Posted Transactions" )
+
         tableView.dataSource = dataSourceDelegate
         tableView.delegate = dataSourceDelegate
         
-        appendTransactions( transactionData, title: "Authorized Transactions" )
-        appendTransactions( postedData, title: "Posted Transactions" )
     }
     
-    private func appendTransactions( data: [Transaction], title: String ) {
+    private func processTransactions( data: [Transaction], title: String ) {
         
         dataSourceDelegate.appendHeader(title, subtitle: "")
         
@@ -113,25 +39,25 @@ class AccountDetailsTransactionListViewController: UIViewController {
         }
         
         var i = 0
-        var curTransaction: Transaction? = (i < data.count) ? data[i++] : nil
+        var currentTransaction: Transaction? = (i < data.count) ? data[i++] : nil
         
         var total = 0.0
-        while curTransaction != nil {
+        while currentTransaction != nil {
         
-            let curDate = curTransaction!.date
+            let curDate = currentTransaction!.date
             dataSourceDelegate.appendSubheader(curDate)
             
-            while (curTransaction != nil) && (curTransaction!.date == curDate) {
+            while (currentTransaction != nil) && (currentTransaction!.date == curDate) {
             
-                if curTransaction!.debit == "D" {
-                    total += curTransaction!.amount
+                if currentTransaction!.debit == "D" {
+                    total += currentTransaction!.amount
                 }
                 else {
-                    total -= curTransaction!.amount
+                    total -= currentTransaction!.amount
                 }
-                dataSourceDelegate.appendDetail(curTransaction!.description, amount: curTransaction!.amount, debit: curTransaction!.debit)
+                dataSourceDelegate.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount, debit: currentTransaction!.debit)
                 
-                curTransaction = (i < data.count) ? data[i++] : nil
+                currentTransaction = (i < data.count) ? data[i++] : nil
             }
             dataSourceDelegate.appendSubfooter()
         
