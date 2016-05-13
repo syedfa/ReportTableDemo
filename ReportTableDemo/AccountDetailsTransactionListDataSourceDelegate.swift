@@ -12,19 +12,19 @@ private enum Cell: String {
     case Header
     case Subheader
     case Detail
-    case Message
-    case Total
     case Subfooter
+    case Footer
+    case Message
 }
 
 private enum Row {
-    case  Header( title: String, subtitle: String )
-    case  Subheader( title: String, odd: Bool )
-    case  Detail( description: String, amount: String, odd: Bool )
-    case  Message( message: String )
-    case  Total( total: String, odd: Bool )
-    case  Subfooter( odd : Bool )
-    
+    case Header( title: String, subtitle: String )
+    case Subheader( title: String, odd: Bool )
+    case Detail( description: String, amount: String, odd: Bool )
+    case Subfooter( odd : Bool )
+    case Footer( total: String, odd: Bool )
+    case Message( message: String )
+   
     var cellId: Cell {
         get {
             switch self {
@@ -36,8 +36,8 @@ private enum Row {
                 return .Detail
             case Message:
                 return .Message
-            case Total:
-                return .Total
+            case Footer:
+                return .Footer
             case Subfooter:
                 return .Subfooter
             }
@@ -54,7 +54,7 @@ private enum Row {
                 return 18.0
             case Message:
                 return 100.0
-            case Total:
+            case Footer:
                 return 44.0
             case Subfooter:
                 return 18.0
@@ -77,12 +77,12 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
     private var rows = [Row]()
     private var odd = false
     
-    func appendHeader(name: String , subtitle: String ) {
+    func appendHeaderWithTitle( title: String , subtitle: String ) {
     
-        rows.append(.Header(title: name, subtitle: subtitle));
+        rows.append(.Header(title: title, subtitle: subtitle));
     }
     
-    func appendSubheader( inDateString: String ) {
+    func appendSubheaderWithDate( inDateString: String ) {
     
         odd = !odd;
         
@@ -96,7 +96,7 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
         rows.append(.Subheader(title: outDate, odd: odd))
     }
     
-    func appendDetail(description: String, amount: Double, debit: String) {
+    func appendDetailWithDescription( description: String, amount: Double, debit: String) {
     
         let amountString = (debit == "D" ? "" : "-") + String( format: "%.2f", amount )
         rows.append( .Detail(description: description, amount: amountString, odd: odd));
@@ -107,14 +107,14 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
         rows.append(.Subfooter( odd: odd ));
     }
     
-    func appendTotal(total: Double) {
+    func appendFooterWithTotal( total: Double) {
     
         odd = !odd;
         let totalString = String( format: "%.2f", total)
-        rows.append(.Total(total: totalString, odd: odd));
+        rows.append(.Footer(total: totalString, odd: odd));
     }
     
-    func appendMessage(message: String) {
+    func appendMessage( message: String) {
     
         rows.append(.Message(message: message));
     }
@@ -203,7 +203,7 @@ class TotalCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let .Total(total, odd) = row {
+        if case let .Footer(total, odd) = row {
             totalLabel.text = total
             processBackgroundColour(odd)
         }
