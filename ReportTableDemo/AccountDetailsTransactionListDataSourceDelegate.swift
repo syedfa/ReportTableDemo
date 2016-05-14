@@ -131,7 +131,7 @@ extension TransactionCell where Self: UITableViewCell {
     var oddBandBackground: Int { return 0xF7F8FC }
     var evenBandBackground: Int { return 0xFAFBFD }
     
-    func processBackgroundColour(odd: Bool ) {
+    func setBackgroundColourAsOdd(odd: Bool ) {
         
         if odd {
             backgroundColor = UIColor( rgb: oddBandBackground );
@@ -164,7 +164,7 @@ class SubheaderCell: UITableViewCell, TransactionCell {
         
         if case let .Subheader( title, odd ) = row {
             titleLabel.text = title
-            processBackgroundColour(odd)
+            setBackgroundColourAsOdd(odd)
         }
     }
 }
@@ -179,7 +179,7 @@ class DetailCell: UITableViewCell, TransactionCell {
         if case let .Detail( description, amount, odd ) = row {
             descriptionLabel.text = description
             amountLabel.text = amount
-            processBackgroundColour(odd)
+            setBackgroundColourAsOdd(odd)
         }
     }
 }
@@ -190,7 +190,7 @@ class SubfooterCell: UITableViewCell, TransactionCell {
     private func bind(row: Row) {
         
         if case let  .Subfooter( odd ) = row {
-            processBackgroundColour(odd);
+            setBackgroundColourAsOdd(odd);
         }
     }
 }
@@ -203,7 +203,7 @@ class TotalCell: UITableViewCell, TransactionCell {
         
         if case let .Footer(total, odd) = row {
             totalLabel.text = total
-            processBackgroundColour(odd)
+            setBackgroundColourAsOdd(odd)
         }
     }
 }
@@ -216,7 +216,7 @@ class MessageCell: UITableViewCell, TransactionCell {
         
         if case let .Message( message ) = row {
             messageLabel.text = message
-            processBackgroundColour(true)
+            setBackgroundColourAsOdd(true)
         }
     }
 }
