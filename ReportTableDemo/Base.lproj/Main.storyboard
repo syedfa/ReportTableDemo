@@ -117,7 +117,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Total" id="qVW-Qo-6aY" customClass="TotalCell" customModule="ReportTableDemo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Footer" id="qVW-Qo-6aY" customClass="TotalCell" customModule="ReportTableDemo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="178" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qVW-Qo-6aY" id="WYQ-V7-WAz">
