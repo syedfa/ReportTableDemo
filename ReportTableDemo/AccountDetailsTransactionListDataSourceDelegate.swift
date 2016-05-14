@@ -127,6 +127,7 @@ private protocol TransactionCell {
 }
 
 extension TransactionCell where Self: UITableViewCell {
+    
     var oddBandBackground: Int { return 0xF7F8FC }
     var evenBandBackground: Int { return 0xFAFBFD }
     
@@ -188,11 +189,8 @@ class SubfooterCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        switch row {
-        case let .Subfooter( odd ):
+        if case let  .Subfooter( odd ) = row {
             processBackgroundColour(odd);
-        default:
-            break
         }
     }
 }
