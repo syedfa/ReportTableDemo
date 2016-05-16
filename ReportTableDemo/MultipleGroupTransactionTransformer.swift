@@ -73,12 +73,7 @@ class MultipleGroupTransactionTransformer {
             return group
         }
         else {
-            if group!.rawValue < transaction!.group.rawValue {
-                return group
-            }
-            else {
-                return transaction!.group
-            }
+            return (group!.rawValue < transaction!.group.rawValue) ? group : transaction!.group
         }
     }
 }
