@@ -12,7 +12,7 @@ class MultipleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: [Transaction], groupList: [Transaction.TransactionType] ) {
+    func transformTransactions( data: [Transaction], groupList: [Transaction.Group] ) {
         
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()
@@ -26,21 +26,21 @@ class MultipleGroupTransactionTransformer {
             
             dataSourceDelegate.appendHeaderWithTitle(currentGroup!.rawValue, subtitle: "")
             
-            if (currentTransaction == nil) || (minGroup != currentTransaction!.type) {
-                dataSourceDelegate.appendMessage( "\(currentGroup!.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think ")
+            if (currentTransaction == nil) || (minGroup != currentTransaction!.group) {
+                
+                dataSourceDelegate.appendMessage( "\(currentGroup!.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think of that!")
                 currentGroup = groupStream.next()
                 minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
-
             }
             else {
             
                 var total = 0.0
-                while (currentTransaction != nil) && ( currentTransaction!.type == minGroup  ){
+                while (currentTransaction != nil) && ( currentTransaction!.group == minGroup  ){
                     
                     let curDate = currentTransaction!.date
                     dataSourceDelegate.appendSubheaderWithDate(curDate)
                     
-                    while (currentTransaction != nil) && (currentTransaction!.type == minGroup) && (currentTransaction!.date == curDate) {
+                    while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == curDate) {
                         
                         if currentTransaction!.debit == "D" {
                             total += currentTransaction!.amount
@@ -61,23 +61,23 @@ class MultipleGroupTransactionTransformer {
         }
     }
     
-    func determineMinGroup( group: Transaction.TransactionType?, transaction: Transaction? ) -> Transaction.TransactionType? {
+    func determineMinGroup( group: Transaction.Group?, transaction: Transaction? ) -> Transaction.Group? {
         
         if (group == nil) && (transaction == nil) {
             return nil
         }
         else if group == nil {
-            return transaction!.type
+            return transaction!.group
         }
         else if transaction == nil {
             return group
         }
         else {
-            if group!.rawValue < transaction!.type.rawValue {
+            if group!.rawValue < transaction!.group.rawValue {
                 return group
             }
             else {
-                return transaction!.type
+                return transaction!.group
             }
         }
     }

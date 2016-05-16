@@ -148,15 +148,15 @@
                                             <outlet property="totalLabel" destination="9Oe-Jd-rag" id="8fQ-0x-eRK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message" id="vJj-jB-TdO" customClass="MessageCell" customModule="ReportTableDemo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="222" width="600" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Message" rowHeight="70" id="vJj-jB-TdO" customClass="MessageCell" customModule="ReportTableDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="222" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vJj-jB-TdO" id="slc-GK-gK4">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geo-Kv-9as">
-                                                    <rect key="frame" x="25" y="14.5" width="54.5" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Geo-Kv-9as">
+                                                    <rect key="frame" x="25" y="27" width="550" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -164,6 +164,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Geo-Kv-9as" firstAttribute="centerY" secondItem="slc-GK-gK4" secondAttribute="centerY" id="DjM-6v-0ly"/>
+                                                <constraint firstAttribute="trailing" secondItem="Geo-Kv-9as" secondAttribute="trailing" constant="25" id="IN6-Du-guO"/>
                                                 <constraint firstItem="Geo-Kv-9as" firstAttribute="leading" secondItem="slc-GK-gK4" secondAttribute="leading" constant="25" id="Tzt-Wb-lo3"/>
                                             </constraints>
                                         </tableViewCellContentView>

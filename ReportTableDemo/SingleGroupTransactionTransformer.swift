@@ -12,15 +12,16 @@ class SingleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: [Transaction], title: String ) {
+    func transformTransactions( data: [Transaction], group: Transaction.Group ) {
         
         var transactionStream = data.generate()
         var currentTransaction = transactionStream.next()
         
-        dataSourceDelegate.appendHeaderWithTitle(title, subtitle: "")
+        dataSourceDelegate.appendHeaderWithTitle(group.rawValue, subtitle: "")
         
         if currentTransaction == nil {
-            dataSourceDelegate.appendMessage( "\(title) are not currently available. You might want to call us and tell us what you think ")
+            
+            dataSourceDelegate.appendMessage( "\(group.rawValue) are not currently available. You might want to call us and tell us what you think of that!")
             return
         }
         
