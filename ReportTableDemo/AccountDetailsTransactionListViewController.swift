@@ -20,10 +20,15 @@ class AccountDetailsTransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let transformer = TransactionTransformer( dataSourceDelegate: dataSourceDelegate );
+//        let transformer = TransactionTransformerTwoStreams( dataSourceDelegate: dataSourceDelegate )
+//        
+//        transformer.transformTransactions( authorizedData, title: "Authorized" )
+//        transformer.transformTransactions( postedData, title: "Posted" )
         
-        transformer.transformTransactions( authorizedData, title: "Authorized Transactions" )
-        transformer.transformTransactions( postedData, title: "Posted Transactions" )
+        
+        let transformer = TransactionTransformerSingleStream( dataSourceDelegate: dataSourceDelegate )
+        transformer.transformTransactions(allData)
+
 
         tableView.dataSource = dataSourceDelegate
         tableView.delegate = dataSourceDelegate

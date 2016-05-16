@@ -150,7 +150,7 @@ class HeaderCell: UITableViewCell, TransactionCell {
     private func bind(row: Row) {
         
         if case let .Header( title, subtitle) = row {
-            titleLabel.text = title
+            titleLabel.text = title + " Transactions"
             subtitleLabel.text = subtitle
         }
     }

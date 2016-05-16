@@ -1,7 +1,3 @@
-//
-//  TransactionTransformer.swift
-//  ReportTableDemo
-//
 //  Created by Lyle Resnick on 2016-05-13.
 //  Copyright © 2016 Cellarpoint. All rights reserved.
 //
@@ -10,9 +6,9 @@ import UIKit
 
 
 
-class TransactionTransformer {
+class TransactionTransformerTwoStreams {
     
-    let dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate
+    private let dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate
     
     private var index = 0
     private var data: [Transaction]!
@@ -76,12 +72,4 @@ class TransactionTransformer {
         }
         return transaction
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
