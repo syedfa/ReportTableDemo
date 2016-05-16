@@ -4,27 +4,22 @@
 
 import UIKit
 
-
-
-class TransactionTransformerSingleStream {
-    
-    private var groupList: [Transaction.TransactionType] = [.Authorized, .Posted]
+class MultipleGroupTransactionTransformer {
     
     private let dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate
-    
-    private var index = 0
-    private var data: [Transaction]!
     
     init( dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate ) {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: [Transaction] ) {
+    func transformTransactions( data: [Transaction], groupList: [Transaction.TransactionType] ) {
         
         var groupStream = groupList.generate()
-        
         var currentGroup = groupStream.next()
-        var currentTransaction = firstTransaction( data: data )
+        
+        var transactionStream = data.generate()
+        var currentTransaction = transactionStream.next()
+        
         var minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
 
         while minGroup != nil {
@@ -55,7 +50,7 @@ class TransactionTransformerSingleStream {
                         }
                         dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount, debit: currentTransaction!.debit)
                         
-                        currentTransaction = nextTransaction()
+                        currentTransaction = transactionStream.next()
                     }
                     dataSourceDelegate.appendSubfooter()
                 }
@@ -65,29 +60,6 @@ class TransactionTransformerSingleStream {
             }
         }
     }
-    
-    
-    private func firstTransaction( data data: [Transaction] ) -> Transaction? {
-        
-        index = 0
-        self.data = data
-        return nextTransaction()
-    }
-    
-    
-    // before ++ was deprecated, one could have written
-    // currentTransaction = (index < data.count) ? data[index++] : nil
-    
-    private func nextTransaction() -> Transaction? {
-        var transaction: Transaction? = nil
-        
-        if index < data.count {
-            transaction = data[index]
-            index += 1
-        }
-        return transaction
-    }
-    
     
     func determineMinGroup( group: Transaction.TransactionType?, transaction: Transaction? ) -> Transaction.TransactionType? {
         

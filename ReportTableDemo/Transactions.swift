@@ -1,7 +1,4 @@
-//
-//  Transactions.swift
-//  ReportTableDemo
-//
+
 //  Created by Lyle Resnick on 2016-05-12.
 //  Copyright © 2016 Cellarpoint. All rights reserved.
 //
@@ -25,8 +22,8 @@ struct Transaction {
     var debit: String
 }
 
+let groupList: [Transaction.TransactionType] = [.Authorized, .Posted]
 
-//let authorizedData:[Transaction] = []
 let authorizedData = [
     
     Transaction( type: .Authorized, date: "2016-04-01", description: "Starbucks", amount: 3.11, debit: "D" ),

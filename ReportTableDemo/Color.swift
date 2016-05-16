@@ -1,7 +1,4 @@
-//
-//  Color.swift
-//  ReportTableDemo
-//
+
 //  Created by Lyle Resnick on 2016-05-09.
 //  Copyright © 2016 Cellarpoint. All rights reserved.
 //
@@ -13,7 +10,6 @@ extension UIColor {
     convenience init( rgb: Int ) {
         self.init( rgb: rgb, alpha: 1.0 )
     }
-    
     
     convenience init( rgb: Int, alpha: CGFloat )  {
         self.init(

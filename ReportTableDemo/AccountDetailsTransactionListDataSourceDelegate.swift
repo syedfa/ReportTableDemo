@@ -1,7 +1,4 @@
-//
-//  AccountDetailsTransactionListDataSource.swift
-//  ReportTableDemo
-//
+
 //  Created by Lyle Resnick on 2016-05-09.
 //  Copyright © 2016 Cellarpoint. All rights reserved.
 //
@@ -61,7 +58,6 @@ private enum Row {
             }
         }
     }
-
 }
 
 class AccountDetailsTransactionListDataSourceDelegate: NSObject {
@@ -89,7 +85,7 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
         guard
             let date = inboundDateFormat.dateFromString( inDateString )
         else {
-            NSLog("Format of Transaction Date  is incorrect")
+            NSLog("Format of Transaction Date is incorrect")
             abort()
         }
         let outDate = outboundDateFormat.stringFromDate(date)
@@ -189,7 +185,7 @@ class SubfooterCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let  .Subfooter( odd ) = row {
+        if case let .Subfooter( odd ) = row {
             setBackgroundColourAsOdd(odd);
         }
     }
@@ -220,7 +216,6 @@ class MessageCell: UITableViewCell, TransactionCell {
         }
     }
 }
-
 
 // MARK: - UITableViewDataSource
 
