@@ -116,6 +116,32 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
     }
 }
 
+// MARK: - UITableViewDataSource
+
+extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let data = rows[ indexPath.row ]
+        let cell = tableView.dequeueReusableCellWithIdentifier(data.cellId.rawValue, forIndexPath: indexPath) as! TransactionCell
+        cell.bind(data)
+        return cell as! UITableViewCell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rows.count
+    }
+}
+
+// MARK: - UITableViewDelegate
+
+extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return rows[ indexPath.row ].height
+    }
+}
+
 // MARK: - Cells
 
 private protocol TransactionCell {
@@ -214,33 +240,6 @@ class MessageCell: UITableViewCell, TransactionCell {
             messageLabel.text = message
             setBackgroundColourAsOdd(true)
         }
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDataSource {
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let data = rows[ indexPath.row ]
-        let cell = tableView.dequeueReusableCellWithIdentifier(data.cellId.rawValue, forIndexPath: indexPath) as! TransactionCell
-        cell.bind(data)
-        return cell as! UITableViewCell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows.count
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDelegate {
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        return rows[ indexPath.row ].height
     }
 }
 
