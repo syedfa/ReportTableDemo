@@ -21,7 +21,7 @@ class SingleGroupTransactionTransformer {
         
         if currentTransaction == nil {
             
-            dataSourceDelegate.appendMessage( "\(group.rawValue) are not currently available. You might want to call us and tell us what you think of that!")
+            dataSourceDelegate.appendMessage( "\(group.rawValue) Transactions are not currently available. You might want to call us and tell us what you think of that!")
             return
         }
         

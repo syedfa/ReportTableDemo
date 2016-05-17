@@ -171,10 +171,9 @@ class HeaderCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let .Header( title, subtitle) = row {
-            titleLabel.text = title + " Transactions"
-            subtitleLabel.text = subtitle
-        }
+        guard case let .Header( title, subtitle) = row else { assert(false) }
+        titleLabel.text = title + " Transactions"
+        subtitleLabel.text = subtitle
     }
 }
 
@@ -184,10 +183,9 @@ class SubheaderCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let .Subheader( title, odd ) = row {
-            titleLabel.text = title
-            setBackgroundColourAsOdd(odd)
-        }
+        guard case let .Subheader( title, odd ) = row else { assert(false) }
+        titleLabel.text = title
+        setBackgroundColourAsOdd(odd)
     }
 }
 
@@ -198,11 +196,10 @@ class DetailCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let .Detail( description, amount, odd ) = row {
-            descriptionLabel.text = description
-            amountLabel.text = amount
-            setBackgroundColourAsOdd(odd)
-        }
+        guard case let .Detail( description, amount, odd ) = row else { assert(false) }
+        descriptionLabel.text = description
+        amountLabel.text = amount
+        setBackgroundColourAsOdd(odd)
     }
 }
 
@@ -211,9 +208,8 @@ class SubfooterCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let .Subfooter( odd ) = row {
-            setBackgroundColourAsOdd(odd);
-        }
+        guard case let .Subfooter( odd ) = row else { assert(false) }
+        setBackgroundColourAsOdd(odd);
     }
 }
 
@@ -223,10 +219,9 @@ class TotalCell: UITableViewCell, TransactionCell {
     
     private func bind(row: Row) {
         
-        if case let .Footer(total, odd) = row {
-            totalLabel.text = total
-            setBackgroundColourAsOdd(odd)
-        }
+        guard case let .Footer(total, odd) = row else { assert(false) }
+        totalLabel.text = total
+        setBackgroundColourAsOdd(odd)
     }
 }
 
@@ -236,10 +231,9 @@ class MessageCell: UITableViewCell, TransactionCell {
     
     private  func bind(row: Row) {
         
-        if case let .Message( message ) = row {
-            messageLabel.text = message
-            setBackgroundColourAsOdd(true)
-        }
+        guard case let .Message( message ) = row else { assert(false) }
+        messageLabel.text = message
+        setBackgroundColourAsOdd(true)
     }
 }
 
