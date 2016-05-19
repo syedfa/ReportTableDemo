@@ -12,35 +12,35 @@ class SingleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: [Transaction], group: Transaction.Group ) {
+    func transformTransactions( data: [TransactionModel], group: TransactionModel.Group ) {
         
         var transactionStream = data.generate()
-        var currentTransaction = transactionStream.next()
+        var currentTransactionModel = transactionStream.next()
         
         dataSourceDelegate.appendHeaderWithTitle(group.rawValue, subtitle: "")
         
-        if currentTransaction == nil {
+        if currentTransactionModel == nil {
             
-            dataSourceDelegate.appendMessage( "\(group.rawValue) Transactions are not currently available. You might want to call us and tell us what you think of that!")
+            dataSourceDelegate.appendMessage( "\(group.rawValue) TransactionModels are not currently available. You might want to call us and tell us what you think of that!")
             return
         }
         
         var total = 0.0
-        while currentTransaction != nil {
+        while currentTransactionModel != nil {
             
-            let curDate = currentTransaction!.date
+            let curDate = currentTransactionModel!.date
             dataSourceDelegate.appendSubheaderWithDate(curDate)
             
-            while (currentTransaction != nil) && (currentTransaction!.date == curDate) {
+            while (currentTransactionModel != nil) && (currentTransactionModel!.date == curDate) {
                 
-                if currentTransaction!.debit == "D" {
-                    total += currentTransaction!.amount
+                if currentTransactionModel!.debit == "D" {
+                    total += currentTransactionModel!.amount
                 }
                 else {
-                    total -= currentTransaction!.amount
+                    total -= currentTransactionModel!.amount
                 }
-                dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount, debit: currentTransaction!.debit)
-                currentTransaction = transactionStream.next()
+                dataSourceDelegate.appendDetailWithDescription(currentTransactionModel!.description, amount: currentTransactionModel!.amount, debit: currentTransactionModel!.debit)
+                currentTransactionModel = transactionStream.next()
             }
             dataSourceDelegate.appendSubfooter()
         }

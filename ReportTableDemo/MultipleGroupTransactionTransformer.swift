@@ -12,7 +12,7 @@ class MultipleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: [Transaction], groupList: [Transaction.Group] ) {
+    func transformTransactions( data: [TransactionModel], groupList: [TransactionModel.Group] ) {
         
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()
@@ -61,7 +61,7 @@ class MultipleGroupTransactionTransformer {
         }
     }
     
-    func determineMinGroup( group: Transaction.Group?, transaction: Transaction? ) -> Transaction.Group? {
+    func determineMinGroup( group: TransactionModel.Group?, transaction: TransactionModel? ) -> TransactionModel.Group? {
         
         if (group == nil) && (transaction == nil) {
             return nil
