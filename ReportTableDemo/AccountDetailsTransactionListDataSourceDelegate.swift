@@ -62,13 +62,8 @@ private enum Row {
 
 class AccountDetailsTransactionListDataSourceDelegate: NSObject {
     
-    private let inboundDateFormat = NSDateFormatter()
-    private let outboundDateFormat = NSDateFormatter()
-    
-    override init() {
-        inboundDateFormat.dateFormat = "yyyy'-'MM'-'dd"
-        outboundDateFormat.dateFormat = "MMM' 'dd', 'yyyy"
-    }
+//    override init() {
+//    }
 
     private var rows = [Row]()
     private var odd = false
@@ -78,24 +73,16 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
         rows.append(.Header(title: title, subtitle: subtitle));
     }
     
-    func appendSubheaderWithDate( inDateString: String ) {
+    func appendSubheaderWithDate( date: String ) {
     
         odd = !odd;
         
-        guard
-            let date = inboundDateFormat.dateFromString( inDateString )
-        else {
-            NSLog("Format of Transaction Date is incorrect")
-            abort()
-        }
-        let outDate = outboundDateFormat.stringFromDate(date)
-        rows.append(.Subheader(title: outDate, odd: odd))
+        rows.append(.Subheader(title: date, odd: odd))
     }
     
-    func appendDetailWithDescription( description: String, amount: Double, debit: String) {
+    func appendDetailWithDescription( description: String, amount: String) {
     
-        let amountString = (debit == "D" ? "" : "-") + String( format: "%.2f", amount )
-        rows.append( .Detail(description: description, amount: amountString, odd: odd));
+        rows.append( .Detail(description: description, amount: amount, odd: odd));
     }
     
     func appendSubfooter() {

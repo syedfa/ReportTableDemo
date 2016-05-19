@@ -12,13 +12,13 @@ class MultipleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: [TransactionModel], groupList: [TransactionModel.Group] ) {
+    func transformTransactions( data: [TransactionModel], groupList: [TransactionViewModel.Group] ) {
         
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()
         
         var transactionStream = data.generate()
-        var currentTransaction = transactionStream.next()
+        var currentTransaction = TransactionViewModel(transaction: transactionStream.next())
         
         var minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
 
@@ -42,15 +42,10 @@ class MultipleGroupTransactionTransformer {
                     
                     while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == curDate) {
                         
-                        if currentTransaction!.debit == "D" {
-                            total += currentTransaction!.amount
-                        }
-                        else {
-                            total -= currentTransaction!.amount
-                        }
-                        dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount, debit: currentTransaction!.debit)
+                        total += currentTransaction!.amountDouble
+                        dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
                         
-                        currentTransaction = transactionStream.next()
+                        currentTransaction = TransactionViewModel(transaction: transactionStream.next())
                     }
                     dataSourceDelegate.appendSubfooter()
                 }
@@ -61,7 +56,7 @@ class MultipleGroupTransactionTransformer {
         }
     }
     
-    func determineMinGroup( group: TransactionModel.Group?, transaction: TransactionModel? ) -> TransactionModel.Group? {
+    func determineMinGroup( group: TransactionViewModel.Group?, transaction: TransactionViewModel? ) -> TransactionViewModel.Group? {
         
         if (group == nil) && (transaction == nil) {
             return nil

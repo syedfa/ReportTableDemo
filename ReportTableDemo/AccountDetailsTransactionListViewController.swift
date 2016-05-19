@@ -19,7 +19,7 @@ class AccountDetailsTransactionListViewController: UIViewController {
 //        transformer.transformTransactions( postedData, group: .Posted )
         
         let transformer = MultipleGroupTransactionTransformer( dataSourceDelegate: dataSourceDelegate )
-        transformer.transformTransactions(allData, groupList: groupList)
+        transformer.transformTransactions(allData, groupList: TransactionViewModel.groupList)
 
         tableView.dataSource = dataSourceDelegate
         tableView.delegate = dataSourceDelegate

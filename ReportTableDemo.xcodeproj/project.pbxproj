@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B381783B1CE6E2420051FE0A /* MultipleGroupTransactionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B381783A1CE6E2420051FE0A /* MultipleGroupTransactionTransformer.swift */; };
+		B3A15EF31CEDF00300BFABC7 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15EF21CEDF00300BFABC7 /* TransactionViewModel.swift */; };
 		B3C86F801CE4C0EE00A21CFE /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C86F7F1CE4C0EE00A21CFE /* Transactions.swift */; };
 		B3C86F861CE61AA600A21CFE /* SingleGroupTransactionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C86F851CE61AA600A21CFE /* SingleGroupTransactionTransformer.swift */; };
 		B3D6E3ED1CDD217E00DD2325 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6E3EC1CDD217E00DD2325 /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		B381783A1CE6E2420051FE0A /* MultipleGroupTransactionTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleGroupTransactionTransformer.swift; sourceTree = "<group>"; };
+		B3A15EF21CEDF00300BFABC7 /* TransactionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		B3C86F7F1CE4C0EE00A21CFE /* Transactions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
 		B3C86F851CE61AA600A21CFE /* SingleGroupTransactionTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleGroupTransactionTransformer.swift; sourceTree = "<group>"; };
 		B3D6E3E91CDD217E00DD2325 /* ReportTableDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReportTableDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 				B3D6E3F31CDD217E00DD2325 /* Assets.xcassets */,
 				B3D6E3F51CDD217E00DD2325 /* LaunchScreen.storyboard */,
 				B3D6E3F81CDD217E00DD2325 /* Info.plist */,
+				B3A15EF21CEDF00300BFABC7 /* TransactionViewModel.swift */,
 			);
 			path = ReportTableDemo;
 			sourceTree = "<group>";
@@ -278,6 +281,7 @@
 				B3D6E41D1CE10E0D00DD2325 /* Color.swift in Sources */,
 				B3D6E3EF1CDD217E00DD2325 /* AccountDetailsTransactionListViewController.swift in Sources */,
 				B3D6E3ED1CDD217E00DD2325 /* AppDelegate.swift in Sources */,
+				B3A15EF31CEDF00300BFABC7 /* TransactionViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
