@@ -25,7 +25,7 @@ class SingleGroupTransactionTransformer {
             return
         }
         
-        var total = 0.0
+        var total = TransactionGroupViewModel()
         while currentTransaction != nil {
             
             let curDate = currentTransaction!.date
@@ -33,12 +33,13 @@ class SingleGroupTransactionTransformer {
             
             while (currentTransaction != nil) && (currentTransaction!.date == curDate) {
                 
-                total += currentTransaction!.amountDouble
+                total.addAmount(currentTransaction!.amountDouble)
+
                 dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
                 currentTransaction = TransactionViewModel(transaction: transactionStream.next())
             }
             dataSourceDelegate.appendSubfooter()
         }
-        dataSourceDelegate.appendFooterWithTotal(total)
+        dataSourceDelegate.appendFooterWithTotal(total.total)
     }
 }

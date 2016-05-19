@@ -34,7 +34,7 @@ class MultipleGroupTransactionTransformer {
             }
             else {
             
-                var total = 0.0
+                var total = TransactionGroupViewModel()
                 while (currentTransaction != nil) && ( currentTransaction!.group == minGroup  ){
                     
                     let curDate = currentTransaction!.date
@@ -42,14 +42,14 @@ class MultipleGroupTransactionTransformer {
                     
                     while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == curDate) {
                         
-                        total += currentTransaction!.amountDouble
+                        total.addAmount(currentTransaction!.amountDouble)
                         dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
                         
                         currentTransaction = TransactionViewModel(transaction: transactionStream.next())
                     }
                     dataSourceDelegate.appendSubfooter()
                 }
-                dataSourceDelegate.appendFooterWithTotal(total)
+                dataSourceDelegate.appendFooterWithTotal(total.total)
                 currentGroup = groupStream.next()
                 minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
             }

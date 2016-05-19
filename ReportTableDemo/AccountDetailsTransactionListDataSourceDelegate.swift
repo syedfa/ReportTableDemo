@@ -90,11 +90,10 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
         rows.append(.Subfooter( odd: odd ));
     }
     
-    func appendFooterWithTotal( total: Double) {
+    func appendFooterWithTotal( total: String) {
     
         odd = !odd;
-        let totalString = String( format: "%.2f", total)
-        rows.append(.Footer(total: totalString, odd: odd));
+        rows.append(.Footer(total: total, odd: odd));
     }
     
     func appendMessage( message: String) {
