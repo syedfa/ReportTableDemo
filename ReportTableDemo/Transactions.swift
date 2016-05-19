@@ -5,9 +5,6 @@
 
 import UIKit
 
-
-
-
 struct TransactionModel {
     
     var group: String

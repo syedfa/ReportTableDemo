@@ -116,11 +116,11 @@
 				B381783A1CE6E2420051FE0A /* MultipleGroupTransactionTransformer.swift */,
 				B3D6E41C1CE10E0D00DD2325 /* Color.swift */,
 				B3C86F7F1CE4C0EE00A21CFE /* Transactions.swift */,
+				B3A15EF21CEDF00300BFABC7 /* TransactionViewModel.swift */,
 				B3D6E3F01CDD217E00DD2325 /* Main.storyboard */,
 				B3D6E3F31CDD217E00DD2325 /* Assets.xcassets */,
 				B3D6E3F51CDD217E00DD2325 /* LaunchScreen.storyboard */,
 				B3D6E3F81CDD217E00DD2325 /* Info.plist */,
-				B3A15EF21CEDF00300BFABC7 /* TransactionViewModel.swift */,
 			);
 			path = ReportTableDemo;
 			sourceTree = "<group>";
