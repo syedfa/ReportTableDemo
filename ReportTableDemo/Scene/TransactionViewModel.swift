@@ -12,12 +12,12 @@ struct TransactionViewModel {
         case Posted
     }
     
-    static let groupList: [TransactionViewModel.Group] = [.Authorized, .Posted]
+    static let groupList: [Group] = [.Authorized, .Posted]
     
     private static let inboundDateFormat = NSDateFormatter()
     private static let outboundDateFormat = NSDateFormatter()
     
-    var group: TransactionViewModel.Group { return transaction.group == "A" ? .Authorized : .Posted }
+    var group: Group { return transaction.group == "A" ? .Authorized : .Posted }
     
     var date: String {
         guard let dateAsDate = TransactionViewModel.inboundDateFormat.dateFromString( transaction.date )
