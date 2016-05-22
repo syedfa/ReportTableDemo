@@ -109,9 +109,9 @@ extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let data = rows[ indexPath.row ]
-        let cell = tableView.dequeueReusableCellWithIdentifier(data.cellId.rawValue, forIndexPath: indexPath) as! TransactionCell
-        cell.bind(data)
-        return cell as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(data.cellId.rawValue, forIndexPath: indexPath)
+        (cell as! TransactionCell).bind(data)
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
