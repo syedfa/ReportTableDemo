@@ -136,10 +136,10 @@ private protocol TransactionCell {
 
 extension TransactionCell where Self: UITableViewCell {
     
-    var oddBandBackground: Int { return 0xF7F8FC }
-    var evenBandBackground: Int { return 0xFAFBFD }
+    private var oddBandBackground: Int { return 0xF7F8FC }
+    private var evenBandBackground: Int { return 0xFAFBFD }
     
-    func setBackgroundColourAsOdd(odd: Bool ) {
+    private func setBackgroundColourAsOdd(odd: Bool ) {
         
         if odd {
             backgroundColor = UIColor( rgb: oddBandBackground );
