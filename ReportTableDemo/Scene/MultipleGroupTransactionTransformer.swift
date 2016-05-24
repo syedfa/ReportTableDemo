@@ -12,7 +12,7 @@ class MultipleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: TransactionListViewModel, groupList: [TransactionViewModel.Group] ) {
+    func transformTransactions( data: TransactionViewModelSequence, groupList: [TransactionViewModel.Group] ) {
         
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()

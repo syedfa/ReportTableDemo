@@ -15,8 +15,8 @@ class AccountDetailsTransactionListViewController: UIViewController {
         super.viewDidLoad()
         
         let transformer = SingleGroupTransactionTransformer( dataSourceDelegate: dataSourceDelegate )
-        transformer.transformTransactions( TransactionListViewModel( transactions: authorizedData ), group: .Authorized )
-        transformer.transformTransactions( TransactionListViewModel( transactions: postedData ), group: .Posted )
+        transformer.transformTransactions( TransactionViewModelSequence( transactions: authorizedData ), group: .Authorized )
+        transformer.transformTransactions( TransactionViewModelSequence( transactions: postedData ), group: .Posted )
         
 //        let transformer = MultipleGroupTransactionTransformer( dataSourceDelegate: dataSourceDelegate )
 //        transformer.transformTransactions( TransactionListViewModel( transactions: allData ), groupList: TransactionViewModel.groupList)

@@ -6,7 +6,7 @@
 import UIKit
 
 
-struct TransactionListViewModel: SequenceType {
+struct TransactionViewModelSequence: SequenceType {
     
     let transactions: [TransactionModel]
     
