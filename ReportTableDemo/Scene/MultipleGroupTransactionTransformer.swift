@@ -17,8 +17,8 @@ class MultipleGroupTransactionTransformer {
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()
         
-        var transactionStream = data.generate()
-        var currentTransaction = TransactionViewModel(transaction: transactionStream.next())
+        var transactionStream = TransactionListViewModel( transactions: data )
+        var currentTransaction = transactionStream.next()
         
         var minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
 
@@ -45,7 +45,7 @@ class MultipleGroupTransactionTransformer {
                         currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
                         dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
                         
-                        currentTransaction = TransactionViewModel(transaction: transactionStream.next())
+                        currentTransaction = transactionStream.next()
                     }
                     dataSourceDelegate.appendSubfooter()
                 }

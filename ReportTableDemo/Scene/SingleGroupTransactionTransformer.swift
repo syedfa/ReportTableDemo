@@ -14,14 +14,14 @@ class SingleGroupTransactionTransformer {
     
     func transformTransactions( data: [TransactionModel], group: TransactionViewModel.Group ) {
         
-        var transactionStream = data.generate()
-        var currentTransaction = TransactionViewModel(transaction: transactionStream.next() )
+        var transactionStream = TransactionListViewModel( transactions: data )
+        var currentTransaction = transactionStream.next()
         
         dataSourceDelegate.appendHeaderWithTitle(group.rawValue, subtitle: "")
         
         if currentTransaction == nil {
             
-            dataSourceDelegate.appendMessage( "\(group.rawValue) TransactionModels are not currently available. You might want to call us and tell us what you think of that!")
+            dataSourceDelegate.appendMessage( "\(group.rawValue) Transactions are not currently available. You might want to call us and tell us what you think of that!")
             return
         }
         
@@ -36,7 +36,7 @@ class SingleGroupTransactionTransformer {
                 currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
 
                 dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
-                currentTransaction = TransactionViewModel(transaction: transactionStream.next())
+                currentTransaction = transactionStream.next()
             }
             dataSourceDelegate.appendSubfooter()
         }
