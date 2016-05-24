@@ -28,8 +28,8 @@ struct TransactionViewModelGenerator: GeneratorType {
         
         guard index < transactions.count else { return nil }
         
-        let transactionViewModel =  TransactionViewModel(transaction: transactions[ index ])
+        let transactionModel =  transactions[ index ]
         index += 1
-        return transactionViewModel
+        return TransactionViewModel(transaction: transactionModel )
     }
 }

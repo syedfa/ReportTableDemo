@@ -26,6 +26,7 @@ class SingleGroupTransactionTransformer {
         }
         
         var currentTransactionGroup = TransactionGroupViewModel()
+        
         while currentTransaction != nil {
             
             let currentDate = currentTransaction!.date
@@ -34,7 +35,6 @@ class SingleGroupTransactionTransformer {
             while (currentTransaction != nil) && (currentTransaction!.date == currentDate) {
                 
                 currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
-
                 dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
                 currentTransaction = transactionStream.next()
             }
