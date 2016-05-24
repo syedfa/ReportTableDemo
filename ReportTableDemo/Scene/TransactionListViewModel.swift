@@ -6,16 +6,30 @@
 import UIKit
 
 
-struct TransactionListViewModel: GeneratorType {
+struct TransactionListViewModel: SequenceType {
     
-    private var transactionStream: IndexingGenerator<[TransactionModel]>
+    let transactions: [TransactionModel]
+    
+    func generate() -> TransactionViewModelGenerator {
+        return TransactionViewModelGenerator (transactions: transactions )
+    }
+}
+
+struct TransactionViewModelGenerator: GeneratorType {
+    
+    private var transactions: [TransactionModel]
+    private var index = 0
     
     init( transactions: [TransactionModel] ) {
-        transactionStream = transactions.generate()
+        self.transactions = transactions
     }
     
     mutating func next() -> TransactionViewModel? {
-        return TransactionViewModel(transaction: transactionStream.next() )
+        
+        guard index < transactions.count else { return nil }
+        
+        let transactionViewModel =  TransactionViewModel(transaction: transactions[ index ])
+        index += 1
+        return transactionViewModel
     }
-    
 }
