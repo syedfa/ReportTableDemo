@@ -12,9 +12,9 @@ class SingleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: TransactionViewModelSequence, group: TransactionViewModel.Group ) {
+    func transformTransactions( data: AnyGenerator<TransactionViewModel>, group: TransactionViewModel.Group ) {
         
-        var transactionStream = data.generate()
+        let transactionStream = data.generate()
         var currentTransaction = transactionStream.next()
         
         dataSourceDelegate.appendHeaderWithTitle(group.rawValue, subtitle: "")

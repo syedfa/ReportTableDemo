@@ -12,12 +12,12 @@ class MultipleGroupTransactionTransformer {
         self.dataSourceDelegate = dataSourceDelegate
     }
     
-    func transformTransactions( data: TransactionViewModelSequence, groupList: [TransactionViewModel.Group] ) {
+    func transformTransactions( data: AnyGenerator<TransactionViewModel>, groupList: [TransactionViewModel.Group] ) {
         
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()
         
-        var transactionStream = data.generate()
+        let transactionStream = data.generate()
         var currentTransaction = transactionStream.next()
         
         var minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )

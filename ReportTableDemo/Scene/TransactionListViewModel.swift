@@ -5,26 +5,11 @@
 
 import UIKit
 
-
-struct TransactionViewModelSequence: SequenceType {
+func transactionViewModelGenerator( transactions transactions: [TransactionModel]) -> AnyGenerator<TransactionViewModel> {
     
-    let transactions: [TransactionModel]
+    var index = 0
     
-    func generate() -> TransactionViewModelGenerator {
-        return TransactionViewModelGenerator (transactions: transactions )
-    }
-}
-
-struct TransactionViewModelGenerator: GeneratorType {
-    
-    private var transactions: [TransactionModel]
-    private var index = 0
-    
-    init( transactions: [TransactionModel] ) {
-        self.transactions = transactions
-    }
-    
-    mutating func next() -> TransactionViewModel? {
+    return AnyGenerator {
         
         guard index < transactions.count else { return nil }
         
