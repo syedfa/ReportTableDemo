@@ -9,20 +9,20 @@ class AccountDetailsTransactionListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let dataSourceDelegate = AccountDetailsTransactionListDataSourceDelegate()
+    let reportStash = AccountDetailsTransactionReportStash()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let transformer = TransactionTransformer( output: dataSourceDelegate )
+        let transformer = TransactionTransformer( output: reportStash )
         transformer.transformTransactions( transactionViewModelGenerator( transactions: authorizedData ), group: .Authorized )
         transformer.transformTransactions( transactionViewModelGenerator( transactions: postedData ), group: .Posted )
         
-//        let transformer = MultipleGroupTransactionTransformer( output: dataSourceDelegate )
+//        let transformer = MultipleGroupTransactionTransformer( output: reportStash )
 //        transformer.transformTransactions( transactionViewModelGenerator( transactions: allData ), groupList: TransactionViewModel.groupList)
 
-        tableView.dataSource = dataSourceDelegate
-        tableView.delegate = dataSourceDelegate
+        tableView.dataSource = reportStash
+        tableView.delegate = reportStash
     }
 }
 

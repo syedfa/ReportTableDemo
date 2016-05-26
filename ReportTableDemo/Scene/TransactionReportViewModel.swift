@@ -4,7 +4,7 @@
 //
 
 
-struct TransactionGroupViewModel {
+struct TransactionReportViewModel {
     private var totalDouble = 0.0
     
     var total: String { return String( format: "%.2f", totalDouble) }

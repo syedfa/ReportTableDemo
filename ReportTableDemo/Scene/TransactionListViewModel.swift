@@ -5,7 +5,10 @@
 
 import UIKit
 
-func transactionViewModelGenerator( transactions transactions: [TransactionModel]) -> AnyGenerator<TransactionViewModel> {
+
+typealias TransactionViewModelGenerator = AnyGenerator<TransactionViewModel>
+
+func transactionViewModelGenerator( transactions transactions: [TransactionModel]) -> TransactionViewModelGenerator {
     
     var index = 0
     

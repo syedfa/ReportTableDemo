@@ -12,7 +12,7 @@ class MultipleGroupTransactionTransformer {
         self.output = output
     }
     
-    func transformTransactions( data: AnyGenerator<TransactionViewModel>, groupList: [TransactionViewModel.Group] ) {
+    func transformTransactions( data: TransactionViewModelGenerator, groupList: [TransactionViewModel.Group] ) {
         
         var groupStream = groupList.generate()
         var currentGroup = groupStream.next()
@@ -34,7 +34,7 @@ class MultipleGroupTransactionTransformer {
             }
             else {
             
-                var currentTransactionGroup = TransactionGroupViewModel()
+                var transactionReport = TransactionReportViewModel()
                 while (currentTransaction != nil) && ( currentTransaction!.group == minGroup  ){
                     
                     let currentDate = currentTransaction!.date
@@ -42,14 +42,14 @@ class MultipleGroupTransactionTransformer {
                     
                     while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == currentDate) {
                         
-                        currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
+                        transactionReport.addAmount(currentTransaction!.amountDouble)
                         output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                         
                         currentTransaction = transactionStream.next()
                     }
                     output.appendSubfooter()
                 }
-                output.appendFooter(currentTransactionGroup.total)
+                output.appendFooter(transactionReport.total)
                 currentGroup = groupStream.next()
                 minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
             }

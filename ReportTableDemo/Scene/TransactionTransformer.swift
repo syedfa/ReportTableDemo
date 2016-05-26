@@ -12,7 +12,7 @@ class TransactionTransformer {
         self.output = output
     }
     
-    func transformTransactions( data: AnyGenerator<TransactionViewModel>, group: TransactionViewModel.Group ) {
+    func transformTransactions( data: TransactionViewModelGenerator, group: TransactionViewModel.Group ) {
         
         let transactionStream = data.generate()
         var currentTransaction = transactionStream.next()
@@ -25,7 +25,7 @@ class TransactionTransformer {
             return
         }
         
-        var currentTransactionGroup = TransactionGroupViewModel()
+        var transactionReport = TransactionReportViewModel()
         
         while currentTransaction != nil {
             
@@ -34,12 +34,12 @@ class TransactionTransformer {
             
             while (currentTransaction != nil) && (currentTransaction!.date == currentDate) {
                 
-                currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
+                transactionReport.addAmount(currentTransaction!.amountDouble)
                 output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                 currentTransaction = transactionStream.next()
             }
             output.appendSubfooter()
         }
-        output.appendFooter(currentTransactionGroup.total)
+        output.appendFooter(transactionReport.total)
     }
 }

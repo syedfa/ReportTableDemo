@@ -60,7 +60,7 @@ private enum Row {
     }
 }
 
-class AccountDetailsTransactionListDataSourceDelegate: NSObject {
+class AccountDetailsTransactionReportStash: NSObject {
     
     private var rows = [Row]()
     private var odd = false
@@ -68,7 +68,7 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
 
 // MARK: - TransactionTransformerOutput
 
-extension AccountDetailsTransactionListDataSourceDelegate: TransactionTransformerOutput {
+extension AccountDetailsTransactionReportStash: TransactionTransformerOutput {
 
     func appendHeader( title: String , subtitle: String ) {
     
@@ -105,7 +105,7 @@ extension AccountDetailsTransactionListDataSourceDelegate: TransactionTransforme
 
 // MARK: - UITableViewDataSource
 
-extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDataSource {
+extension AccountDetailsTransactionReportStash: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -122,7 +122,7 @@ extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDataSource
 
 // MARK: - UITableViewDelegate
 
-extension AccountDetailsTransactionListDataSourceDelegate: UITableViewDelegate {
+extension AccountDetailsTransactionReportStash: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return rows[ indexPath.row ].height
@@ -138,7 +138,7 @@ private protocol TransactionCell {
 extension TransactionCell where Self: UITableViewCell {
     
     private var oddBandBackground: Int { return 0xF7F8FC }
-    private var evenBandBackground: Int { return 0xFAFBFD }
+    private var evenBandBackground: Int { return 0xDDDDDD }
     
     private func setBackgroundColourAsOdd(odd: Bool ) {
         
