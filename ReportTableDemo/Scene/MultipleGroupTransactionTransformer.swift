@@ -6,10 +6,10 @@ import UIKit
 
 class MultipleGroupTransactionTransformer {
     
-    private let dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate
+    private let output: TransactionTransformerOutput
     
-    init( dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate ) {
-        self.dataSourceDelegate = dataSourceDelegate
+    init( output: TransactionTransformerOutput ) {
+        self.output = output
     }
     
     func transformTransactions( data: AnyGenerator<TransactionViewModel>, groupList: [TransactionViewModel.Group] ) {
@@ -24,11 +24,11 @@ class MultipleGroupTransactionTransformer {
 
         while minGroup != nil {
             
-            dataSourceDelegate.appendHeaderWithTitle(currentGroup!.rawValue, subtitle: "")
+            output.appendHeader(currentGroup!.rawValue, subtitle: "")
             
             if (currentTransaction == nil) || (minGroup != currentTransaction!.group) {
                 
-                dataSourceDelegate.appendMessage( "\(currentGroup!.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think of that!")
+                output.appendMessage( "\(currentGroup!.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think of that!")
                 currentGroup = groupStream.next()
                 minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
             }
@@ -38,18 +38,18 @@ class MultipleGroupTransactionTransformer {
                 while (currentTransaction != nil) && ( currentTransaction!.group == minGroup  ){
                     
                     let currentDate = currentTransaction!.date
-                    dataSourceDelegate.appendSubheaderWithDate(currentDate)
+                    output.appendSubheader(currentDate)
                     
                     while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == currentDate) {
                         
                         currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
-                        dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
+                        output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                         
                         currentTransaction = transactionStream.next()
                     }
-                    dataSourceDelegate.appendSubfooter()
+                    output.appendSubfooter()
                 }
-                dataSourceDelegate.appendFooterWithTotal(currentTransactionGroup.total)
+                output.appendFooter(currentTransactionGroup.total)
                 currentGroup = groupStream.next()
                 minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
             }

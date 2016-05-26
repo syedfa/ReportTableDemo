@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B37BC7F91CF67F9A0080BCDB /* TransactionTransformerOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37BC7F81CF67F9A0080BCDB /* TransactionTransformerOutput.swift */; };
 		B3A15F021CF24DF400BFABC7 /* AccountDetailsTransactionListDataSourceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15EFC1CF24DF400BFABC7 /* AccountDetailsTransactionListDataSourceDelegate.swift */; };
 		B3A15F031CF24DF400BFABC7 /* AccountDetailsTransactionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15EFD1CF24DF400BFABC7 /* AccountDetailsTransactionListViewController.swift */; };
 		B3A15F041CF24DF400BFABC7 /* MultipleGroupTransactionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15EFE1CF24DF400BFABC7 /* MultipleGroupTransactionTransformer.swift */; };
-		B3A15F051CF24DF400BFABC7 /* SingleGroupTransactionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15EFF1CF24DF400BFABC7 /* SingleGroupTransactionTransformer.swift */; };
+		B3A15F051CF24DF400BFABC7 /* TransactionTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15EFF1CF24DF400BFABC7 /* TransactionTransformer.swift */; };
 		B3A15F061CF24DF400BFABC7 /* TransactionGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15F001CF24DF400BFABC7 /* TransactionGroupViewModel.swift */; };
 		B3A15F071CF24DF400BFABC7 /* TransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15F011CF24DF400BFABC7 /* TransactionViewModel.swift */; };
 		B3A15F091CF482A400BFABC7 /* TransactionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A15F081CF482A400BFABC7 /* TransactionListViewModel.swift */; };
@@ -42,10 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B37BC7F81CF67F9A0080BCDB /* TransactionTransformerOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTransformerOutput.swift; sourceTree = "<group>"; };
 		B3A15EFC1CF24DF400BFABC7 /* AccountDetailsTransactionListDataSourceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailsTransactionListDataSourceDelegate.swift; sourceTree = "<group>"; };
 		B3A15EFD1CF24DF400BFABC7 /* AccountDetailsTransactionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailsTransactionListViewController.swift; sourceTree = "<group>"; };
 		B3A15EFE1CF24DF400BFABC7 /* MultipleGroupTransactionTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleGroupTransactionTransformer.swift; sourceTree = "<group>"; };
-		B3A15EFF1CF24DF400BFABC7 /* SingleGroupTransactionTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleGroupTransactionTransformer.swift; sourceTree = "<group>"; };
+		B3A15EFF1CF24DF400BFABC7 /* TransactionTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTransformer.swift; sourceTree = "<group>"; };
 		B3A15F001CF24DF400BFABC7 /* TransactionGroupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionGroupViewModel.swift; sourceTree = "<group>"; };
 		B3A15F011CF24DF400BFABC7 /* TransactionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionViewModel.swift; sourceTree = "<group>"; };
 		B3A15F081CF482A400BFABC7 /* TransactionListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionListViewModel.swift; sourceTree = "<group>"; };
@@ -93,13 +95,14 @@
 		B3A15EFB1CF24DF400BFABC7 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				B3A15EFC1CF24DF400BFABC7 /* AccountDetailsTransactionListDataSourceDelegate.swift */,
 				B3A15EFD1CF24DF400BFABC7 /* AccountDetailsTransactionListViewController.swift */,
+				B3A15EFC1CF24DF400BFABC7 /* AccountDetailsTransactionListDataSourceDelegate.swift */,
 				B3A15EFE1CF24DF400BFABC7 /* MultipleGroupTransactionTransformer.swift */,
-				B3A15EFF1CF24DF400BFABC7 /* SingleGroupTransactionTransformer.swift */,
+				B3A15EFF1CF24DF400BFABC7 /* TransactionTransformer.swift */,
 				B3A15F001CF24DF400BFABC7 /* TransactionGroupViewModel.swift */,
 				B3A15F011CF24DF400BFABC7 /* TransactionViewModel.swift */,
 				B3A15F081CF482A400BFABC7 /* TransactionListViewModel.swift */,
+				B37BC7F81CF67F9A0080BCDB /* TransactionTransformerOutput.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -290,9 +293,10 @@
 			files = (
 				B3C86F801CE4C0EE00A21CFE /* Transactions.swift in Sources */,
 				B3A15F091CF482A400BFABC7 /* TransactionListViewModel.swift in Sources */,
+				B37BC7F91CF67F9A0080BCDB /* TransactionTransformerOutput.swift in Sources */,
 				B3A15F061CF24DF400BFABC7 /* TransactionGroupViewModel.swift in Sources */,
 				B3A15F071CF24DF400BFABC7 /* TransactionViewModel.swift in Sources */,
-				B3A15F051CF24DF400BFABC7 /* SingleGroupTransactionTransformer.swift in Sources */,
+				B3A15F051CF24DF400BFABC7 /* TransactionTransformer.swift in Sources */,
 				B3D6E41D1CE10E0D00DD2325 /* Color.swift in Sources */,
 				B3A15F041CF24DF400BFABC7 /* MultipleGroupTransactionTransformer.swift in Sources */,
 				B3D6E3ED1CDD217E00DD2325 /* AppDelegate.swift in Sources */,

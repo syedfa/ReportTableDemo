@@ -14,11 +14,11 @@ class AccountDetailsTransactionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let transformer = SingleGroupTransactionTransformer( dataSourceDelegate: dataSourceDelegate )
+        let transformer = TransactionTransformer( output: dataSourceDelegate )
         transformer.transformTransactions( transactionViewModelGenerator( transactions: authorizedData ), group: .Authorized )
         transformer.transformTransactions( transactionViewModelGenerator( transactions: postedData ), group: .Posted )
         
-//        let transformer = MultipleGroupTransactionTransformer( dataSourceDelegate: dataSourceDelegate )
+//        let transformer = MultipleGroupTransactionTransformer( output: dataSourceDelegate )
 //        transformer.transformTransactions( transactionViewModelGenerator( transactions: allData ), groupList: TransactionViewModel.groupList)
 
         tableView.dataSource = dataSourceDelegate

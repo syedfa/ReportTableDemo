@@ -62,25 +62,26 @@ private enum Row {
 
 class AccountDetailsTransactionListDataSourceDelegate: NSObject {
     
-//    override init() {
-//    }
-
     private var rows = [Row]()
     private var odd = false
-    
-    func appendHeaderWithTitle( title: String , subtitle: String ) {
+}
+
+// MARK: - TransactionTransformerOutput
+
+extension AccountDetailsTransactionListDataSourceDelegate: TransactionTransformerOutput {
+
+    func appendHeader( title: String , subtitle: String ) {
     
         rows.append(.Header(title: title, subtitle: subtitle));
     }
     
-    func appendSubheaderWithDate( date: String ) {
+    func appendSubheader( date: String ) {
     
         odd = !odd;
-        
         rows.append(.Subheader(title: date, odd: odd))
     }
     
-    func appendDetailWithDescription( description: String, amount: String) {
+    func appendDetail( description: String, amount: String) {
     
         rows.append( .Detail(description: description, amount: amount, odd: odd));
     }
@@ -90,7 +91,7 @@ class AccountDetailsTransactionListDataSourceDelegate: NSObject {
         rows.append(.Subfooter( odd: odd ));
     }
     
-    func appendFooterWithTotal( total: String) {
+    func appendFooter( total: String) {
     
         odd = !odd;
         rows.append(.Footer(total: total, odd: odd));

@@ -4,12 +4,12 @@
 
 import UIKit
 
-class SingleGroupTransactionTransformer {
+class TransactionTransformer {
     
-    private let dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate
+    private let output: TransactionTransformerOutput
     
-    init( dataSourceDelegate: AccountDetailsTransactionListDataSourceDelegate ) {
-        self.dataSourceDelegate = dataSourceDelegate
+    init( output: TransactionTransformerOutput ) {
+        self.output = output
     }
     
     func transformTransactions( data: AnyGenerator<TransactionViewModel>, group: TransactionViewModel.Group ) {
@@ -17,11 +17,11 @@ class SingleGroupTransactionTransformer {
         let transactionStream = data.generate()
         var currentTransaction = transactionStream.next()
         
-        dataSourceDelegate.appendHeaderWithTitle(group.rawValue, subtitle: "")
+        output.appendHeader(group.rawValue, subtitle: "")
         
         if currentTransaction == nil {
             
-            dataSourceDelegate.appendMessage( "\(group.rawValue) Transactions are not currently available. You might want to call us and tell us what you think of that!")
+            output.appendMessage( "\(group.rawValue) Transactions are not currently available. You might want to call us and tell us what you think of that!")
             return
         }
         
@@ -30,16 +30,16 @@ class SingleGroupTransactionTransformer {
         while currentTransaction != nil {
             
             let currentDate = currentTransaction!.date
-            dataSourceDelegate.appendSubheaderWithDate(currentDate)
+            output.appendSubheader(currentDate)
             
             while (currentTransaction != nil) && (currentTransaction!.date == currentDate) {
                 
                 currentTransactionGroup.addAmount(currentTransaction!.amountDouble)
-                dataSourceDelegate.appendDetailWithDescription(currentTransaction!.description, amount: currentTransaction!.amount)
+                output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                 currentTransaction = transactionStream.next()
             }
-            dataSourceDelegate.appendSubfooter()
+            output.appendSubfooter()
         }
-        dataSourceDelegate.appendFooterWithTotal(currentTransactionGroup.total)
+        output.appendFooter(currentTransactionGroup.total)
     }
 }
