@@ -10,14 +10,9 @@ typealias TransactionViewModelGenerator = AnyGenerator<TransactionViewModel>
 
 func transactionViewModelGenerator( transactions transactions: [TransactionModel]) -> TransactionViewModelGenerator {
     
-    var index = 0
+    var generator = transactions.generate()
     
     return AnyGenerator {
-        
-        guard index < transactions.count else { return nil }
-        
-        let transactionModel =  transactions[ index ]
-        index += 1
-        return TransactionViewModel(transaction: transactionModel )
+        return TransactionViewModel(transaction: generator.next() )
     }
 }
