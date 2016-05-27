@@ -14,8 +14,18 @@ struct TransactionViewModel {
     
     static let groupList: [Group] = [.Authorized, .Posted]
     
-    private static let inboundDateFormat = NSDateFormatter()
-    private static let outboundDateFormat = NSDateFormatter()
+    private static let inboundDateFormat: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy'-'MM'-'dd"
+        return formatter
+    }()
+    
+    
+    private static let outboundDateFormat: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MMM' 'dd', 'yyyy"
+        return  formatter
+    }()
     
     var group: Group { return transaction.group == "A" ? .Authorized : .Posted }
     
@@ -44,10 +54,6 @@ struct TransactionViewModel {
 
     init?( transaction: TransactionModel? ) {
         guard let transaction = transaction else { return nil }
-        dispatch_once(&once) {
-            TransactionViewModel.inboundDateFormat.dateFormat = "yyyy'-'MM'-'dd"
-            TransactionViewModel.outboundDateFormat.dateFormat = "MMM' 'dd', 'yyyy"
-        }
         self.transaction = transaction
     }
     
