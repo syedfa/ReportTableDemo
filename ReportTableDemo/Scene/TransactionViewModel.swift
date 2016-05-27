@@ -50,8 +50,6 @@ struct TransactionViewModel {
     
     private let transaction: TransactionModel
     
-    private var once = dispatch_once_t()
-
     init?( transaction: TransactionModel? ) {
         guard let transaction = transaction else { return nil }
         self.transaction = transaction
