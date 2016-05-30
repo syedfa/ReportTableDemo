@@ -28,19 +28,19 @@ class MultipleGroupTransactionTransformer {
             
             if (currentTransaction == nil) || (localMinGroup != currentTransaction!.group) {
                 
-                output.appendMessage( "\(currentGroup!.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think of that!")
-                currentGroup = groupStream.next()
-                minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
+                output.appendMessage( "\(localMinGroup.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think of that!")
             }
             else {
             
                 let transactionReport = TransactionReportViewModel()
-                while let localCurrentTransaction = currentTransaction where localCurrentTransaction.group == localMinGroup {
+                while let localCurrentTransaction = currentTransaction
+                    where localCurrentTransaction.group == localMinGroup {
                     
                     let currentDate = localCurrentTransaction.date
                     output.appendSubheader(currentDate)
                     
-                    while let localCurrentTransaction = currentTransaction where (localCurrentTransaction.group == localMinGroup) && (localCurrentTransaction.date == currentDate) {
+                    while let localCurrentTransaction = currentTransaction
+                        where (localCurrentTransaction.group == localMinGroup) && (localCurrentTransaction.date == currentDate) {
                         
                         localCurrentTransaction.addAmountToReport(transactionReport)
                         output.appendDetail(localCurrentTransaction.description, amount: localCurrentTransaction.amount)
@@ -50,9 +50,9 @@ class MultipleGroupTransactionTransformer {
                     output.appendSubfooter()
                 }
                 output.appendFooter(transactionReport.total)
-                currentGroup = groupStream.next()
-                minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
             }
+            currentGroup = groupStream.next()
+            minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
         }
     }
     
