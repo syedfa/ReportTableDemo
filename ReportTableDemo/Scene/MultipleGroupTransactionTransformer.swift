@@ -42,7 +42,7 @@ class MultipleGroupTransactionTransformer {
                     
                     while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == currentDate) {
                         
-                        currentTransaction?.addAmountToReport(transactionReport)
+                        currentTransaction!.addAmountToReport(transactionReport)
                         output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                         
                         currentTransaction = transactionStream.next()

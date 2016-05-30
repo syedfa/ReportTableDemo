@@ -34,7 +34,7 @@ class TransactionTransformer {
             
             while (currentTransaction != nil) && (currentTransaction!.date == currentDate) {
                 
-                currentTransaction?.addAmountToReport(transactionReport)
+                currentTransaction!.addAmountToReport(transactionReport)
                 output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                 currentTransaction = transactionStream.next()
             }
