@@ -27,15 +27,15 @@ class TransactionTransformer {
         
         let transactionReport = TransactionReportViewModel()
         
-        while currentTransaction != nil {
+        while let localCurrentTransaction = currentTransaction {
             
-            let currentDate = currentTransaction!.date
+            let currentDate = localCurrentTransaction.date
             output.appendSubheader(currentDate)
             
-            while (currentTransaction != nil) && (currentTransaction!.date == currentDate) {
+            while let localCurrentTransaction = currentTransaction where localCurrentTransaction.date == currentDate {
                 
-                currentTransaction!.addAmountToReport(transactionReport)
-                output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
+                localCurrentTransaction.addAmountToReport(transactionReport)
+                output.appendDetail(localCurrentTransaction.description, amount: localCurrentTransaction.amount)
                 currentTransaction = transactionStream.next()
             }
             output.appendSubfooter()

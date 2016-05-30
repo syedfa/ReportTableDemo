@@ -22,11 +22,11 @@ class MultipleGroupTransactionTransformer {
         
         var minGroup = determineMinGroup( currentGroup, transaction: currentTransaction )
 
-        while minGroup != nil {
+        while let localMinGroup = minGroup {
             
-            output.appendHeader(currentGroup!.rawValue, subtitle: "")
+            output.appendHeader(localMinGroup.rawValue, subtitle: "")
             
-            if (currentTransaction == nil) || (minGroup != currentTransaction!.group) {
+            if (currentTransaction == nil) || (localMinGroup != currentTransaction!.group) {
                 
                 output.appendMessage( "\(currentGroup!.rawValue) Transactions are not currently Available. You might want to call us and tell us what you think of that!")
                 currentGroup = groupStream.next()
@@ -35,15 +35,15 @@ class MultipleGroupTransactionTransformer {
             else {
             
                 let transactionReport = TransactionReportViewModel()
-                while (currentTransaction != nil) && ( currentTransaction!.group == minGroup  ){
+                while let localCurrentTransaction = currentTransaction where localCurrentTransaction.group == localMinGroup {
                     
-                    let currentDate = currentTransaction!.date
+                    let currentDate = localCurrentTransaction.date
                     output.appendSubheader(currentDate)
                     
-                    while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == currentDate) {
+                    while let localCurrentTransaction = currentTransaction where (localCurrentTransaction.group == localMinGroup) && (localCurrentTransaction.date == currentDate) {
                         
-                        currentTransaction!.addAmountToReport(transactionReport)
-                        output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
+                        localCurrentTransaction.addAmountToReport(transactionReport)
+                        output.appendDetail(localCurrentTransaction.description, amount: localCurrentTransaction.amount)
                         
                         currentTransaction = transactionStream.next()
                     }
