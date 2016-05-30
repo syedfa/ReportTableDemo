@@ -25,7 +25,7 @@ class TransactionTransformer {
             return
         }
         
-        var transactionReport = TransactionReportViewModel()
+        let transactionReport = TransactionReportViewModel()
         
         while currentTransaction != nil {
             
@@ -34,7 +34,7 @@ class TransactionTransformer {
             
             while (currentTransaction != nil) && (currentTransaction!.date == currentDate) {
                 
-                transactionReport.addAmount(currentTransaction!.amountDouble)
+                currentTransaction?.addAmountToReport(transactionReport)
                 output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                 currentTransaction = transactionStream.next()
             }

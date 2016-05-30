@@ -4,12 +4,12 @@
 //
 
 
-struct TransactionReportViewModel {
+class TransactionReportViewModel {
     private var totalDouble = 0.0
     
     var total: String { return String( format: "%.2f", totalDouble) }
     
-    mutating func addAmount( amount: Double ) {
+    func addAmount( amount: Double ) {
         totalDouble += amount
     }
     

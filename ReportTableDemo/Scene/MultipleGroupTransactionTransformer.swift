@@ -34,7 +34,7 @@ class MultipleGroupTransactionTransformer {
             }
             else {
             
-                var transactionReport = TransactionReportViewModel()
+                let transactionReport = TransactionReportViewModel()
                 while (currentTransaction != nil) && ( currentTransaction!.group == minGroup  ){
                     
                     let currentDate = currentTransaction!.date
@@ -42,7 +42,7 @@ class MultipleGroupTransactionTransformer {
                     
                     while (currentTransaction != nil) && (currentTransaction!.group == minGroup) && (currentTransaction!.date == currentDate) {
                         
-                        transactionReport.addAmount(currentTransaction!.amountDouble)
+                        currentTransaction?.addAmountToReport(transactionReport)
                         output.appendDetail(currentTransaction!.description, amount: currentTransaction!.amount)
                         
                         currentTransaction = transactionStream.next()
